@@ -7,6 +7,7 @@ const Pages = ({ totalPosts, postsPerPage, currentPage, setCurrentPage }) => {
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pages.push(i);
   }
+
   return (
     <View style={{ flexDirection: "row" }}>
       {pages.map((page, index) => {

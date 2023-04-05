@@ -1,18 +1,25 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 
-const EpisodeItem = ({ item }) => {
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+const EpisodeItem = ({ data }) => {
+  const navigation = useNavigation();
+
+  const handleNavigate = () => {
+    navigation.navigate("Episode", { itemName: data });
+  };
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={handleNavigate}>
       <View style={styles.name}>
-        <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
+        <Text style={{ fontWeight: "bold" }}>{data.name}</Text>
       </View>
       <View style={styles.row}>
         <View style={styles.episode}>
-          <Text style={styles.episodeText}>{item.episode}</Text>
+          <Text style={styles.episodeText}>{data.episode}</Text>
         </View>
         <View style={styles.date}>
-          <Text style={styles.dateText}>{item.air_date}</Text>
+          <Text style={styles.dateText}>{data.air_date}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -23,7 +30,7 @@ export default EpisodeItem;
 
 const styles = StyleSheet.create({
   card: {
-    width: "45%",
+    width: 180,
     height: 150,
     backgroundColor: "#B9DAF6",
     justifyContent: "center",
