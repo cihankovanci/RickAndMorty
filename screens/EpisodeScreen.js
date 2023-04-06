@@ -3,11 +3,15 @@ import React, { useState, useEffect } from "react";
 import EpisodeItem from "../component/EpisodeItem";
 import axios from "axios";
 import EpisodeCard from "../component/EpisodeCard";
+import CharacterCard from "../component/CharacterCard";
+import Pages from "../component/Pages";
 const EpisodeScreen = ({ route, navigation }) => {
   const [episode, setEpisode] = useState([]);
   const [charactersData, setCharactersData] = useState([]);
   const [characters, setCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
   const { itemName } = route.params;
   //   const url = JSON.stringify(itemName.url);
 
@@ -42,7 +46,7 @@ const EpisodeScreen = ({ route, navigation }) => {
 
   const renderItem = ({ item }) => (
     <View style={{ margin: 10 }}>
-      <Image source={{ uri: item.image }} style={{ width: 150, height: 150 }} />
+      <Image source={{ uri: item.image }} style={{ width: 149, height: 150 }} />
       <Text>{item.name}</Text>
       <Text>{item.status} </Text>
       {/* Kart rengi değişecek */}
@@ -50,14 +54,25 @@ const EpisodeScreen = ({ route, navigation }) => {
     </View>
   );
 
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+
+  const currentPosts = characters.slice(firstPostIndex, lastPostIndex);
+
   return (
-    <View>
+    <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
       <EpisodeCard data={episode} />
       <FlatList
-        data={characters}
-        renderItem={renderItem}
+        data={currentPosts}
+        renderItem={CharacterCard}
         keyExtractor={(item) => item.id}
         numColumns={"2"}
+      />
+      <Pages
+        totalPosts={characters.length}
+        postsPerPage={postsPerPage}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
       />
     </View>
   );

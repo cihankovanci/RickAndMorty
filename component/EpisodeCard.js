@@ -12,7 +12,16 @@ const EpisodeCard = ({ data }) => {
   return (
     <TouchableOpacity style={styles.card} onPress={() => {}}>
       <View style={styles.name}>
-        <Text style={{ fontWeight: "bold", fontSize: 32 }}>{data.name}</Text>
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 24,
+            numberOflines: 2,
+            ellipsizeMode: "tail",
+          }}
+        >
+          {data.name}
+        </Text>
       </View>
       <View style={styles.row}>
         <View style={styles.episode}>
@@ -31,7 +40,7 @@ export default EpisodeCard;
 const styles = StyleSheet.create({
   card: {
     width: "100%",
-    height: 150,
+    height: 100,
     backgroundColor: "#B9DAF6",
     justifyContent: "center",
     alignItems: "center",
