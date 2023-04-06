@@ -1,9 +1,16 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const CharacterCard = ({ item }) => {
+  const navigation = useNavigation();
+
+  const handleNavigate = () => {
+    navigation.navigate("Character", { itemName: item });
+  };
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handleNavigate}>
       <View>
         <Image
           source={{ uri: item.image }}

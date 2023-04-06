@@ -20,7 +20,7 @@ const EpisodeScreen = ({ route, navigation }) => {
 
     setEpisode(response.data);
     setCharactersData(response.data.characters);
-    console.log("aw", response.data.characters);
+    // console.log("aw", response.data.characters);
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const EpisodeScreen = ({ route, navigation }) => {
 
     setCharacters(data);
     setIsLoading(false);
-    console.log("DATA", data);
+    // console.log("DATA", data);
   };
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const EpisodeScreen = ({ route, navigation }) => {
       <EpisodeCard data={episode} />
       <FlatList
         data={currentPosts}
-        renderItem={CharacterCard}
+        renderItem={({ item }) => <CharacterCard item={item} />}
         keyExtractor={(item) => item.id}
         numColumns={"2"}
       />

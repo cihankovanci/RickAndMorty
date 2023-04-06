@@ -7,7 +7,7 @@ const EpisodeItem = ({ data }) => {
   const navigation = useNavigation();
 
   const handleNavigate = () => {
-    navigation.navigate("Episode", { itemName: data });
+    navigation.navigate("Episode", { itemName: data, bool: false });
   };
   return (
     <TouchableOpacity style={styles.card} onPress={handleNavigate}>
