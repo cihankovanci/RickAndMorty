@@ -12,14 +12,34 @@ import Character from "../component/Character";
 import EpisodeItem from "../component/EpisodeItem";
 import EpisodeList from "../component/EpisodeList";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/favoritesSlice";
 const CharacterScreen = ({ route, navigation }) => {
   const [characterData, setCharacterData] = useState([]);
   const [episode, setEpisode] = useState([]);
   const [data, setData] = useState([]);
 
   const { itemName } = route.params;
-  console.log("item", JSON.stringify(itemName));
+  const charid = route.params.itemName.id;
+  console.log("karakter id", charid);
+
+  const favoriteCharacterIds = useSelector((state) => state.favorites.ids);
+
+  const dispatch = useDispatch();
+  console.log("redux", itemName);
+
+  const characterIsFavorite = favoriteCharacterIds.includes(charid);
+
+  function changeFavoriteStatusHandler() {
+    if (characterIsFavorite) {
+      dispatch(removeFavorite({ id: charid }));
+      console.log("REMOVE");
+    } else {
+      dispatch(addFavorite({ id: charid }));
+      console.log("ADD");
+    }
+  }
 
   const getEpisodes = async () => {
     const response = await axios.get(
@@ -75,6 +95,33 @@ const CharacterScreen = ({ route, navigation }) => {
       {/* <Text>{itemName.id}</Text> */}
 
       <View style={{ width: "100%" }}>
+        <TouchableOpacity
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: "center",
+            alignItems: "center",
+            margin: 5,
+            backgroundColor: characterIsFavorite ? "red" : "yellow",
+          }}
+          onPress={changeFavoriteStatusHandler}
+        >
+          <Text>Like</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: "center",
+            alignItems: "center",
+            margin: 5,
+            backgroundColor: "green",
+          }}
+          onPress={() => navigation.navigate("Favorite")}
+        >
+          <Text>FAV SCreen</Text>
+        </TouchableOpacity>
         <Text>EPISODES</Text>
         <FlatList
           numColumns={"12"}

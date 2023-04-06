@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import EpisodeScreen from "../screens/EpisodeScreen";
 import SeasonScreen from "../screens/SeasonScreen";
 import CharacterScreen from "../screens/CharacterScreen";
+import FavoriteScreen from "../screens/FavoriteScreen";
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -14,6 +15,7 @@ const Navigation = () => {
         <Stack.Screen name="Season" component={SeasonScreen} />
         <Stack.Screen name="Episode" component={EpisodeScreen} />
         <Stack.Screen name="Character" component={CharacterScreen} />
+        <Stack.Screen name="Favorite" component={FavoriteScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

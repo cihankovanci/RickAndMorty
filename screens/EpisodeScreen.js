@@ -1,10 +1,20 @@
-import { FlatList, StyleSheet, Text, View, Image } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import EpisodeItem from "../component/EpisodeItem";
 import axios from "axios";
 import EpisodeCard from "../component/EpisodeCard";
 import CharacterCard from "../component/CharacterCard";
 import Pages from "../component/Pages";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch, useSelector } from "react-redux";
+
 const EpisodeScreen = ({ route, navigation }) => {
   const [episode, setEpisode] = useState([]);
   const [charactersData, setCharactersData] = useState([]);
@@ -47,6 +57,7 @@ const EpisodeScreen = ({ route, navigation }) => {
   const renderItem = ({ item }) => (
     <View style={{ margin: 10 }}>
       <Image source={{ uri: item.image }} style={{ width: 149, height: 150 }} />
+      <TouchableOpacity>FAV</TouchableOpacity>
       <Text>{item.name}</Text>
       <Text>{item.status} </Text>
       {/* Kart rengi değişecek */}
@@ -59,12 +70,21 @@ const EpisodeScreen = ({ route, navigation }) => {
 
   const currentPosts = characters.slice(firstPostIndex, lastPostIndex);
 
+  const favoriteCharacterIds = useSelector((state) => state.favorites.ids);
+
+  const dispatch = useDispatch();
+  console.log("redux", itemName);
+
+  function changeFavoriteStatusHandler() {}
+
   return (
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
       <EpisodeCard data={episode} />
       <FlatList
         data={currentPosts}
-        renderItem={({ item }) => <CharacterCard item={item} />}
+        renderItem={({ item }) => (
+          <CharacterCard onClick={() => {}} item={item} />
+        )}
         keyExtractor={(item) => item.id}
         numColumns={"2"}
       />

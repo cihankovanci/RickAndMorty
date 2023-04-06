@@ -1,9 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Navigation from "./navigation/navigation";
+import { store } from "./store/store";
+import { Provider } from "react-redux";
 
 const App = () => {
-  return <Navigation />;
+  return (
+    <Provider store={store}>
+      <Navigation />
+    </Provider>
+  );
 };
 
 export default App;

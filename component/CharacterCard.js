@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-const CharacterCard = ({ item }) => {
+const CharacterCard = ({ item, onClick }) => {
   const navigation = useNavigation();
 
   const handleNavigate = () => {
@@ -22,6 +22,12 @@ const CharacterCard = ({ item }) => {
           }}
         />
       </View>
+      <TouchableOpacity
+        style={{ width: 50, height: 50, backgroundColor: "red" }}
+        onPress={onClick}
+      >
+        <Text>Fav</Text>
+      </TouchableOpacity>
       <View style={styles.InfoContainer}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.DefaultText}>Name: </Text>
