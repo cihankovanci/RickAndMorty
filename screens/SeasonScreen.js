@@ -24,7 +24,7 @@ const SeasonScreen = () => {
       "https://rickandmortyapi.com/api/episode?page=1"
     );
     setSeason(response.data.results);
-    console.log(response.data.results);
+    // console.log(response.data.results);
   };
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const SeasonScreen = () => {
       "https://rickandmortyapi.com/api/episode?page=2"
     );
     setSeason2(response.data.results);
-    console.log(response.data.results);
+    // console.log(response.data.results);
   };
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const SeasonScreen = () => {
       "https://rickandmortyapi.com/api/episode?page=3"
     );
     setSeason3(response.data.results);
-    console.log(response.data.results);
+    // console.log(response.data.results);
   };
 
   useEffect(() => {
