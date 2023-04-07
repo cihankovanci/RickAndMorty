@@ -5,6 +5,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import EpisodeItem from "../component/EpisodeItem";
@@ -22,6 +23,8 @@ const EpisodeScreen = ({ route, navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
+  const [searchText, setSearchText] = useState("");
+
   const { itemName } = route.params;
   //   const url = JSON.stringify(itemName.url);
 
@@ -64,19 +67,33 @@ const EpisodeScreen = ({ route, navigation }) => {
       <Text>{item.origin.name}</Text>
     </View>
   );
-
+  const handleSearch = (text) => {
+    setSearchText(text);
+  };
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
 
   const currentPosts = characters.slice(firstPostIndex, lastPostIndex);
 
+  const filteredSeasons = currentPosts.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.status.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.origin.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   return (
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
       <EpisodeCard data={episode} />
+      <TextInput
+        placeholder="Search for name, status, origin ..."
+        onChangeText={handleSearch}
+        value={searchText}
+      />
       <FlatList
-        data={currentPosts}
+        data={filteredSeasons}
         renderItem={({ item }) => (
-          <CharacterCard onClick={() => {}} item={item} />
+          <CharacterCard onClick={() => {}} item={item} isRemovable={false} />
         )}
         keyExtractor={(item) => item.id}
         numColumns={"2"}

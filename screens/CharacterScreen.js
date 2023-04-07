@@ -113,7 +113,7 @@ const CharacterScreen = ({ route, navigation }) => {
       {/* <Text>{itemName.id}</Text> */}
 
       <View style={{ width: "100%" }}>
-        <Text>EPISODES</Text>
+        <Text>EPISODES </Text>
         <FlatList
           numColumns={"14"}
           data={numbers}

@@ -62,9 +62,19 @@ const FavoriteScreen = ({ route, navigation }) => {
     }
   };
 
+  const totalItems = characters.length;
+  if (totalItems > 10) {
+    Alert.alert(
+      "Uyarı",
+      "“Favori karakter ekleme sayısını aştınız. Başka bir karakteri favorilerden çıkarmalısınız"
+    );
+  }
+
+  const handleRemove = ({ item }) => {};
+
   return (
     <View>
-      <Text>FavoriteScreen</Text>
+      <Text>FavoriteScreen{totalItems}</Text>
 
       {/* <FlatList
         data={characters}
@@ -76,9 +86,26 @@ const FavoriteScreen = ({ route, navigation }) => {
         renderItem={({ item }) => (
           <CharacterCard
             isRemovable={true}
-            onRemove={() => {
-              dispatch(removeFavorite({ id: item.id }));
-            }}
+            onRemove={() =>
+              Alert.alert(
+                `Silme işlemi`,
+                `${item.name} isimli karakteri
+              favorilerden kaldırmak istediğinize emin misiniz?”`,
+                [
+                  {
+                    text: "Evet",
+                    onPress: () => {
+                      dispatch(removeFavorite({ id: item.id }));
+                    },
+                  },
+                  {
+                    text: "Hayır",
+                    onPress: () => {},
+                    style: "cancel",
+                  },
+                ]
+              )
+            }
             item={item}
           />
         )}

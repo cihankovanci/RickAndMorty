@@ -5,6 +5,7 @@ import {
   View,
   FlatList,
   Image,
+  TextInput,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -18,6 +19,8 @@ const SeasonScreen = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [apiPage, setApiPage] = useState(1);
+
+  const [searchText, setSearchText] = useState("");
 
   const getSeason = async () => {
     const response = await axios.get(
@@ -62,10 +65,23 @@ const SeasonScreen = () => {
 
   const currentPosts = mergedSeason.slice(firstPostIndex, lastPostIndex);
 
+  const handleSearch = (text) => {
+    setSearchText(text);
+  };
+  const filteredSeasons = mergedSeason.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.episode.toLowerCase().includes(searchText.toLowerCase())
+  );
   return (
     <View style={styles.container}>
+      <TextInput
+        placeholder="Sezon arayın"
+        onChangeText={handleSearch}
+        value={searchText}
+      />
       <FlatList
-        data={currentPosts}
+        data={filteredSeasons}
         renderItem={({ item }) => <EpisodeItem data={item} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={"2"}
