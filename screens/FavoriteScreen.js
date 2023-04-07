@@ -89,8 +89,7 @@ const FavoriteScreen = ({ route, navigation }) => {
             onRemove={() =>
               Alert.alert(
                 `Silme işlemi`,
-                `${item.name} isimli karakteri
-              favorilerden kaldırmak istediğinize emin misiniz?”`,
+                `${item.name} isimli karakteri favorilerden kaldırmak istediğinize emin misiniz?”`,
                 [
                   {
                     text: "Evet",

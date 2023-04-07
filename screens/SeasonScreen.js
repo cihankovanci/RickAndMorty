@@ -68,7 +68,7 @@ const SeasonScreen = () => {
   const handleSearch = (text) => {
     setSearchText(text);
   };
-  const filteredSeasons = mergedSeason.filter(
+  const filteredSeasons = currentPosts.filter(
     (item) =>
       item.name.toLowerCase().includes(searchText.toLowerCase()) ||
       item.episode.toLowerCase().includes(searchText.toLowerCase())

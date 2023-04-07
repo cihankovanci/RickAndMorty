@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  episodeText: { fontSize: 15 },
+  episodeText: { fontSize: 12 },
   dateText: { fontSize: 10 },
 });
