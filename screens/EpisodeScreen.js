@@ -70,13 +70,6 @@ const EpisodeScreen = ({ route, navigation }) => {
 
   const currentPosts = characters.slice(firstPostIndex, lastPostIndex);
 
-  const favoriteCharacterIds = useSelector((state) => state.favorites.ids);
-
-  const dispatch = useDispatch();
-  console.log("redux", itemName);
-
-  function changeFavoriteStatusHandler() {}
-
   return (
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
       <EpisodeCard data={episode} />

@@ -1,8 +1,15 @@
-import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import EpisodeList from "./EpisodeList";
 
-const Character = ({ item }) => {
+const Character = ({ item, characterIsFavorite, onClick }) => {
   return (
     <View>
       <Image
@@ -14,6 +21,19 @@ const Character = ({ item }) => {
           borderTopRightRadius: 10,
         }}
       />
+      <TouchableOpacity
+        style={{
+          width: "100%",
+          height: 50,
+          justifyContent: "center",
+          alignItems: "center",
+          margin: 5,
+          backgroundColor: characterIsFavorite ? "red" : "yellow",
+        }}
+        onPress={onClick}
+      >
+        <Text>{characterIsFavorite ? "Remove Favorite" : "Add Favorite"}</Text>
+      </TouchableOpacity>
       <View style={styles.InfoContainer}>
         <View style={styles.Infos}>
           <View style={{ flexDirection: "row" }}>

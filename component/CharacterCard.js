@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-const CharacterCard = ({ item, onClick }) => {
+const CharacterCard = ({ item, onRemove, isRemovable }) => {
   const navigation = useNavigation();
 
   const handleNavigate = () => {
@@ -10,8 +10,25 @@ const CharacterCard = ({ item, onClick }) => {
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={handleNavigate}>
+    <TouchableOpacity
+      style={[styles.container, { marginTop: isRemovable ? 50 : 0 }]}
+      onPress={handleNavigate}
+    >
       <View>
+        {isRemovable ? (
+          <TouchableOpacity
+            onPress={onRemove}
+            style={{
+              width: 180,
+              height: 40,
+              backgroundColor: "red",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text>remove</Text>
+          </TouchableOpacity>
+        ) : null}
         <Image
           source={{ uri: item.image }}
           style={{
@@ -22,12 +39,12 @@ const CharacterCard = ({ item, onClick }) => {
           }}
         />
       </View>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={{ width: 50, height: 50, backgroundColor: "red" }}
         onPress={onClick}
       >
         <Text>Fav</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <View style={styles.InfoContainer}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.DefaultText}>Name: </Text>
