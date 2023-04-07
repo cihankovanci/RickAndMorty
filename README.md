@@ -48,8 +48,7 @@ npm start
             <td><img src="assets/AddFav.jpeg" width="300" style="margin-right:30px;"/></td> 
         </tr>
         <tr>
-            
-            <td><img src="assets/FavoriteScreen.jpeg" width="300" style="margin-right:30px;"/></td> 
+             <td><img src="assets/FavoriteScreen.jpeg" width="300" style="margin-right:30px;"/></td> 
             <td><img src="assets/Alert.jpeg" width="300" style="margin-right:30px;"/></td> 
         </tr>
     </tbody>
